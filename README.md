@@ -8,7 +8,12 @@ Configurações do projeto:
 - H2 Database
 - Lombok
 - Validation
+- MapStructure( Mapper)
 - ADICIONAR O SWAGGER para documentar.
+
+NECESSÁRIO INSTALAÇÃO DO LOMBOK
+
+INSERÇÃO DE INFORMAÇÕES INICIAIS NO APPLICATIONRUN
 
 login padrão: user e senha gerada
 
@@ -18,7 +23,11 @@ além de dependências utilitárias como Lombok e Validation. Tem como objetivo 
 de usuários autorizados assim como também a manutenção dos mesmos e seus respectivos perfis e gestão de oportunidades de acordo com
 usuário da revenda.
 
+CONFIGURAR O SECURITYCONFIGURATION 
+
 VARIAVEIS DE AMBIENTE:
 DB_URL
 DB_USER
 DB_PASS
+
+DETALHAR PACOTES NA DESCRIÇÃO
