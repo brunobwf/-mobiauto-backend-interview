@@ -12,22 +12,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name = "revendas")
-@Entity(name = "revendas")
+@Table(name = "perfis")
+@Entity(name = "perfis")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Revenda {
+public class Perfil {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	//Utilizando por padrão de 14 caracteres máximos de um CNPJ sem os caracteres de ponto e barra.
-	@Column(name = "cnpj_revenda", length=14, nullable = false)
-	private String cnpjRevenda;
+	@Column(length=150, nullable = false)
+	private String nome;
 	
-	@Column(name = "nome_social", length=150, nullable = false)
-	private String nomeSocial;
 }

@@ -14,8 +14,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import br.com.mobiauto.error.ApiErrorMessage;
 import br.com.mobiauto.exception.CNPJExistException;
 import br.com.mobiauto.exception.CNPJInvalidException;
-import br.com.mobiauto.exception.EspecificException;
+import br.com.mobiauto.exception.EmailAlreadyExistException;
+import br.com.mobiauto.exception.EmailInvalidException;
 import br.com.mobiauto.exception.NotFoundException;
+import br.com.mobiauto.exception.SpecificException;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -30,8 +32,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		return new ResponseEntity<ApiErrorMessage>(errormessage, errormessage.getStatus());
 	}
 
-	@ExceptionHandler({NotFoundException.class,CNPJInvalidException.class,CNPJExistException.class})
-	public ResponseEntity<ApiErrorMessage> handleEspecificExceptions(EspecificException ex, WebRequest request) {
+	@ExceptionHandler({NotFoundException.class,CNPJInvalidException.class,CNPJExistException.class, EmailInvalidException.class, EmailAlreadyExistException.class})
+	public ResponseEntity<ApiErrorMessage> handleEspecificExceptions(SpecificException ex, WebRequest request) {
 		List<String> errors = new ArrayList<String>();
 		String error = ex.getErrorMessage();
 		errors.add(error);
