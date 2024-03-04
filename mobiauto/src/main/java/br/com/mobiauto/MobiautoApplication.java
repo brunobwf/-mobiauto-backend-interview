@@ -7,10 +7,13 @@ import org.springframework.context.annotation.Bean;
 
 import br.com.mobiauto.dto.PerfilDTO;
 import br.com.mobiauto.dto.RevendaDTO;
+import br.com.mobiauto.dto.StatusDTO;
 import br.com.mobiauto.dto.UsuarioDTO;
 import br.com.mobiauto.model.Revenda;
+import br.com.mobiauto.model.Status;
 import br.com.mobiauto.service.CreatePerfilService;
 import br.com.mobiauto.service.CreateRevendaService;
+import br.com.mobiauto.service.CreateStatusService;
 import br.com.mobiauto.service.CreateUsuarioService;
 
 @SpringBootApplication
@@ -23,7 +26,7 @@ public class MobiautoApplication {
 	
 //	//Inserindo informações iniciais no banco de dados
 	@Bean
-	public CommandLineRunner demo(CreateRevendaService revendaService, CreatePerfilService perfilService, CreateUsuarioService usuarioService) {
+	public CommandLineRunner demo(CreateRevendaService revendaService, CreatePerfilService perfilService, CreateUsuarioService usuarioService, CreateStatusService statusService) {
 		return (args) -> {
 			RevendaDTO revenda = new RevendaDTO();
 			revenda.setCnpjRevenda("12345678912312");
@@ -99,6 +102,17 @@ public class MobiautoApplication {
 			usuario5.setIdRevenda(2L);
 			usuarioService.save(usuario5);
 			
+			StatusDTO status = new StatusDTO();
+			status.setNome("NOVO");
+			statusService.save(status);
+			
+			StatusDTO status2 = new StatusDTO();
+			status2.setNome("EM ATENDIMENTO");
+			statusService.save(status2);
+
+			StatusDTO status3 = new StatusDTO();
+			status3.setNome("CONCLUÍDO");
+			statusService.save(status3);
 			
 		};
 	}

@@ -11,28 +11,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.mobiauto.dto.PerfilDTO;
-
+import br.com.mobiauto.dto.StatusDTO;
 import br.com.mobiauto.exception.NotFoundException;
-import br.com.mobiauto.service.impl.RetrievePerfilServiceImpl;
+import br.com.mobiauto.service.impl.RetrieveStatusServiceImpl;
 
 @RestController
-@RequestMapping("/perfil")
-public class PerfilController {
+@RequestMapping("/status")
+public class StatusController {
 	
 	
 	@Autowired
-	private RetrievePerfilServiceImpl retrievePerfilService;
+	private RetrieveStatusServiceImpl retrieveStatusService;
 
 	
 	@GetMapping
-	public ResponseEntity<List<PerfilDTO>> getPerfils(){
-		return ResponseEntity.status(HttpStatus.OK).body(retrievePerfilService.findAll());
+	public ResponseEntity<List<StatusDTO>> getStatus(){
+		return ResponseEntity.status(HttpStatus.OK).body(retrieveStatusService.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<PerfilDTO> getPerfilsById(@PathVariable Long id) throws NotFoundException{
-		return ResponseEntity.status(HttpStatus.OK).body(retrievePerfilService.findById(id));
+	public ResponseEntity<StatusDTO> getStatusById(@PathVariable Long id) throws NotFoundException{
+		return ResponseEntity.status(HttpStatus.OK).body(retrieveStatusService.findById(id));
 	}
 	
 }
