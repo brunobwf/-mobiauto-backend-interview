@@ -33,7 +33,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	}
 
 	@ExceptionHandler({NotFoundException.class,CNPJInvalidException.class,CNPJExistException.class, EmailInvalidException.class, EmailAlreadyExistException.class})
-	public ResponseEntity<ApiErrorMessage> handleEspecificExceptions(SpecificException ex, WebRequest request) {
+	public ResponseEntity<ApiErrorMessage> handleSpecificExceptions(SpecificException ex, WebRequest request) {
 		List<String> errors = new ArrayList<String>();
 		String error = ex.getErrorMessage();
 		errors.add(error);
