@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import br.com.mobiauto.dto.UsuarioResponseDTO;
 import br.com.mobiauto.exception.NotFoundException;
+import br.com.mobiauto.mapper.RevendaMapper;
 import br.com.mobiauto.mapper.UsuarioMapper;
 import br.com.mobiauto.model.Usuario;
 import br.com.mobiauto.repository.UsuarioRepository;
@@ -23,6 +24,9 @@ public class RetrieveUsuarioServiceImpl implements RetrieveUsuarioService {
 	
 	@Autowired
 	private UsuarioMapper mapper;
+	
+	@Autowired
+	private RevendaMapper revendaMapper;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

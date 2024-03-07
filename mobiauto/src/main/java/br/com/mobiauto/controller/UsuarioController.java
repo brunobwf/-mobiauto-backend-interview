@@ -1,6 +1,7 @@
 package br.com.mobiauto.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +22,13 @@ import br.com.mobiauto.dto.UsuarioResponseDTO;
 import br.com.mobiauto.exception.EmailAlreadyExistException;
 import br.com.mobiauto.exception.EmailInvalidException;
 import br.com.mobiauto.exception.NotFoundException;
+import br.com.mobiauto.exception.SpecificException;
 import br.com.mobiauto.service.DeleteUsuarioService;
 import br.com.mobiauto.service.impl.CreateUsuarioServiceImpl;
 import br.com.mobiauto.service.impl.DeleteUsuarioServiceImpl;
 import br.com.mobiauto.service.impl.RetrieveUsuarioServiceImpl;
 import br.com.mobiauto.service.impl.UpdateUsuarioServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/usuario")
@@ -50,8 +54,8 @@ public class UsuarioController {
 	
 	//Optei por retornar somente o 201(CREATED) sem retorno de um body por não haver necessidade de um retorno.
 	@PostMapping
-	public ResponseEntity<Void> save(@RequestBody UsuarioDTO usuarioDTO) throws NotFoundException, EmailInvalidException, EmailAlreadyExistException {
-		createUsuarioService.save(usuarioDTO);
+	public ResponseEntity<Void> save(@RequestBody UsuarioDTO usuarioDTO, @RequestHeader Map<String,String> headers) throws NotFoundException, EmailInvalidException, EmailAlreadyExistException, SpecificException {
+		createUsuarioService.save(usuarioDTO, headers);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}	
 	

@@ -25,7 +25,7 @@ public class UsuarioResponseDTO {
 
 	private Perfil perfil;
 	
-	private Revenda revenda;
+	private RevendaDTO revenda;
 
 
 }

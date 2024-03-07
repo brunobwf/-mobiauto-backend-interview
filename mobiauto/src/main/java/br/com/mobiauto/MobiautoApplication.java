@@ -1,5 +1,8 @@
 package br.com.mobiauto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,10 +27,14 @@ public class MobiautoApplication {
 	}
 	
 	
-//	//Inserindo informações iniciais no banco de dados
+	/**
+	* Criando informações no banco de dados para inicio da aplicação.
+	*/
 	@Bean
 	public CommandLineRunner demo(CreateRevendaService revendaService, CreatePerfilService perfilService, CreateUsuarioService usuarioService, CreateStatusService statusService) {
 		return (args) -> {
+			Map<String,String> headers = new HashMap<String, String>();
+			headers.put("authorization","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImFkbWluQGVtYWlsLmNvbSIsImV4cCI6MTcwOTc4MTQyOH0.-mnRD6rY1RGNw8G1ZLGICnQDYeinYGAsr2rjhUgjY_c");
 			RevendaDTO revenda = new RevendaDTO();
 			revenda.setCnpjRevenda("12345678912312");
 			revenda.setNomeSocial("Revenda 1");
@@ -68,7 +75,7 @@ public class MobiautoApplication {
 			usuario.setNome("Bruno");
 			usuario.setSenha("123");
 			usuario.setIdPerfil(1L);
-			usuarioService.save(usuario);
+			usuarioService.save(usuario, null);
 			
 			UsuarioDTO usuario2 = new UsuarioDTO();
 			usuario2.setEmail("prop@email.com");
@@ -76,7 +83,7 @@ public class MobiautoApplication {
 			usuario2.setSenha("123");
 			usuario2.setIdPerfil(2L);
 			usuario2.setIdRevenda(1L);
-			usuarioService.save(usuario2);
+			usuarioService.save(usuario2,null);
 			
 			UsuarioDTO usuario3 = new UsuarioDTO();
 			usuario3.setEmail("gerente@email.com");
@@ -84,7 +91,7 @@ public class MobiautoApplication {
 			usuario3.setSenha("123");
 			usuario3.setIdPerfil(3L);
 			usuario3.setIdRevenda(1L);
-			usuarioService.save(usuario3);
+			usuarioService.save(usuario3,null);
 			
 			UsuarioDTO usuario4 = new UsuarioDTO();
 			usuario4.setEmail("assist@email.com");
@@ -92,7 +99,7 @@ public class MobiautoApplication {
 			usuario4.setSenha("123");
 			usuario4.setIdPerfil(4L);
 			usuario4.setIdRevenda(1L);
-			usuarioService.save(usuario4);
+			usuarioService.save(usuario4,null);
 			
 			UsuarioDTO usuario5 = new UsuarioDTO();
 			usuario5.setEmail("assist2@email.com");
@@ -100,7 +107,7 @@ public class MobiautoApplication {
 			usuario5.setSenha("123");
 			usuario5.setIdPerfil(4L);
 			usuario5.setIdRevenda(2L);
-			usuarioService.save(usuario5);
+			usuarioService.save(usuario5,headers);
 			
 			StatusDTO status = new StatusDTO();
 			status.setNome("NOVO");

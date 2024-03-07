@@ -9,7 +9,7 @@ import br.com.mobiauto.model.Revenda;
 
 public interface RetrieveRevendaService {
 	
-	Page<Revenda> findAllPagination(Integer pageNumber, Integer pageSize, String sort);
+	Page<RevendaDTO> findAllPagination(Integer pageNumber, Integer pageSize, String sort);
 	RevendaDTO findRevenda(Long id) throws NotFoundException;
 
 }

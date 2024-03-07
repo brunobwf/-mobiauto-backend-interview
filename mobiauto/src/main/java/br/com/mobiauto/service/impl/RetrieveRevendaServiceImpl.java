@@ -1,7 +1,10 @@
 package br.com.mobiauto.service.impl;
 
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,15 +26,26 @@ public class RetrieveRevendaServiceImpl implements RetrieveRevendaService {
 	@Autowired
 	private RevendaMapper mapper;
 
+	
+	/**
+	* Paginação e mapeamento para DTO 
+	*/
 	@Override
-	public Page<Revenda> findAllPagination(Integer pageNumber, Integer pageSize, String sort) {
+	public Page<RevendaDTO> findAllPagination(Integer pageNumber, Integer pageSize, String sort) {
 		Pageable pageable = null;
 		if (sort != null) {
 			pageable = PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC);
 		} else {
 			pageable = PageRequest.of(pageNumber, pageSize);
 		}
-		return repository.findAll(pageable);
+		
+		 Page<Revenda> pageRevendas = repository.findAll(pageable);
+		 
+	        int totalElements = (int) pageRevendas.getTotalElements();
+	        return new PageImpl<RevendaDTO>(pageRevendas.getContent()
+	                .stream()
+	                .map(pageRevenda -> new RevendaDTO(pageRevenda.getCnpjRevenda(),pageRevenda.getNomeSocial(),pageRevenda.getOportunidades(), null))
+	                .collect(Collectors.toList()), pageable, totalElements);
 	}
 
 	@Override

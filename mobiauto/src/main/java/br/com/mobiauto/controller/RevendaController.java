@@ -43,8 +43,8 @@ public class RevendaController {
 	
 
 	@GetMapping
-	public ResponseEntity<Page<Revenda>> getRevendas(@RequestParam (defaultValue= "0" , required = false) Integer pageNumber , @RequestParam (defaultValue= "2" , required = false) Integer pageSize, @RequestParam (required = false) String sort){
-		Page<Revenda> pageRevenda = retrieveRevendaService.findAllPagination(pageNumber, pageSize, sort);
+	public ResponseEntity<Page<RevendaDTO>> getRevendas(@RequestParam (defaultValue= "0" , required = false) Integer pageNumber , @RequestParam (defaultValue= "2" , required = false) Integer pageSize, @RequestParam (required = false) String sort){
+		Page<RevendaDTO> pageRevenda = retrieveRevendaService.findAllPagination(pageNumber, pageSize, sort);
 		return ResponseEntity.status(HttpStatus.OK).body(pageRevenda);
 	}
 	

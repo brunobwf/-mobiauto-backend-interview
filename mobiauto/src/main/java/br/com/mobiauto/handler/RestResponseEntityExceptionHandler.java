@@ -21,6 +21,11 @@ import br.com.mobiauto.exception.SpecificException;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+	
+	
+	/**
+	* Quando ocorre exceções padrões de SQLConstraint e IllegalArguments no Controller este método é chamado fazendo o tratamento do mesmo e retorno no Json para entendimento do usuário
+	*/
 
 	@ExceptionHandler({SQLIntegrityConstraintViolationException.class,IllegalArgumentException.class})
 	public ResponseEntity<ApiErrorMessage> handleExceptions(Exception ex, WebRequest request) {
@@ -32,7 +37,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		return new ResponseEntity<ApiErrorMessage>(errormessage, errormessage.getStatus());
 	}
 
-	@ExceptionHandler({NotFoundException.class,CNPJInvalidException.class,CNPJExistException.class, EmailInvalidException.class, EmailAlreadyExistException.class})
+	
+	/**
+	* Quando ocorre exceções personalizada  este método é chamado fazendo o tratamento do mesmo e retorno no Json para entendimento do usuário
+	*/
+	
+	@ExceptionHandler({NotFoundException.class,CNPJInvalidException.class,CNPJExistException.class, EmailInvalidException.class, EmailAlreadyExistException.class, SpecificException.class})
 	public ResponseEntity<ApiErrorMessage> handleSpecificExceptions(SpecificException ex, WebRequest request) {
 		List<String> errors = new ArrayList<String>();
 		String error = ex.getErrorMessage();

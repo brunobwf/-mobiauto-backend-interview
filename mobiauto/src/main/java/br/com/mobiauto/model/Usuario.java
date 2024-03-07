@@ -39,8 +39,8 @@ public class Usuario implements UserDetails {
 
 	@Column(length = 150, nullable = false)
 	private String nome;
-	
-	@Column(length = 150, nullable = false, unique= true)
+
+	@Column(length = 150, nullable = false, unique = true)
 	private String email;
 
 	@Column(length = 150, nullable = false)
@@ -49,17 +49,25 @@ public class Usuario implements UserDetails {
 	@ManyToOne
 	@JoinColumn(name = "id_perfil", nullable = false)
 	private Perfil perfil;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_revenda")
 	private Revenda revenda;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if(this.perfil.getNome() == "ADMNISTRADOR") {
-			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-		}else {
-			return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+		if (this.perfil.getNome() == "ADMNISTRADOR") {
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_PROPRIETARIO"),
+					new SimpleGrantedAuthority("ROLE_PROPRIETARIO"), new SimpleGrantedAuthority("ROLE_GERENTE"),
+					new SimpleGrantedAuthority("ROLE_ASSISTENTE"));
+
+		} else if (this.perfil.getNome() == "PROPRIETARIO") {
+			return List.of(new SimpleGrantedAuthority("ROLE_PROPRIETARIO"), new SimpleGrantedAuthority("ROLE_GERENTE"),
+					new SimpleGrantedAuthority("ROLE_ASSISTENTE"));
+		} else if (this.perfil.getNome() == "GERENTE") {
+			return List.of(new SimpleGrantedAuthority("ROLE_GERENTE"), new SimpleGrantedAuthority("ROLE_ASSISTENTE"));
+		} else {
+			return List.of(new SimpleGrantedAuthority("ROLE_ASSISTENTE"));
 		}
 	}
 

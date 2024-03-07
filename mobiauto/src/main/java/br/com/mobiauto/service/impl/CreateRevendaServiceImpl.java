@@ -24,13 +24,20 @@ public class CreateRevendaServiceImpl implements CreateRevendaService {
 	@Override
 	public void save(RevendaDTO revendaDTO) throws CNPJExistException, CNPJInvalidException {
 		
-		//Valida se o CNPJ tem 14 caracteres, não possui letras e não é números únicos repitidos.
+		
+		/**
+		* Valida se o CNPJ tem 14 caracteres, não possui letras e não é números únicos repitidos.
+		*/
+		
 		Boolean validCNPJ = CNPJValidatorUtil.isCNPJ(revendaDTO.getCnpjRevenda());
 		if(validCNPJ == false) {
 			throw new CNPJInvalidException();
 		}
 		
-		//Valida se o CNPJ já está na base dados
+		
+		/**
+		* Valida se o CNPJ já está na base dados
+		*/
 		Revenda existingCnpj = repository.findByCnpjRevenda(revendaDTO.getCnpjRevenda());
 		if(existingCnpj != null) {
 			throw new CNPJExistException();

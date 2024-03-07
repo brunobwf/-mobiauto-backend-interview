@@ -1,11 +1,17 @@
 package br.com.mobiauto.model;
 
 
+import java.util.List;
+
+import org.hibernate.sql.ast.tree.from.MappedByTableGroup;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +36,8 @@ public class Revenda {
 	
 	@Column(name = "nome_social", length=150, nullable = false)
 	private String nomeSocial;
+	
+	@OneToMany
+	@JoinColumn(name = "id_oportunidade" )
+	private List<Oportunidade> oportunidades;
 }
