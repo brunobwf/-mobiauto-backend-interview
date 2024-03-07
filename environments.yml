@@ -1,0 +1,9 @@
+environment variables:
+	  DB_PASS:
+		 - value: sa
+	  DB_URL:
+		 - value: jdbc:h2:mem:testdb
+	  DB_USER:
+		 - value: sa
+	 JWT_SECRET:
+		 - value: 12345		 		 
